@@ -29,6 +29,10 @@ TARGET_OTA_ASSERT_DEVICE := C1904,C1905,C2004,C2005,nicki
 # Cflags
 TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
+# L1/L2 cache sizes
+TARGET_GLOBAL_CFLAGS += --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=1024
+TARGET_GLOBAL_CPPFLAGS += --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=1024
+
 # Kernel
 BOARD_KERNEL_CMDLINE := panic=3 console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_BASE := 0x80200000
