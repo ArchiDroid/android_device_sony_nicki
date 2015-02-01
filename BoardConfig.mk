@@ -44,15 +44,14 @@ TARGET_OTA_ASSERT_DEVICE := C1904,C1905,C2004,C2005,nicki
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-COMMON_GLOBAL_CFLAGS += -DSONY_CAM_PARAMS
+TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 # L1/L2 cache sizes
 TARGET_GLOBAL_CFLAGS += --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=1024
 TARGET_GLOBAL_CPPFLAGS += --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=1024
 
 # Kernel
-BOARD_KERNEL_CMDLINE := panic=3 console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE := panic=3 console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
@@ -81,8 +80,6 @@ TARGET_DISPLAY_USE_RETIRE_FENCE := true
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
-QCOM_FLUENCE_ENABLED := false
-QCOM_ANC_HEADSET_ENABLED := false
 
 # QC AV Enhancements
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
@@ -97,7 +94,8 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_HAS_RIL_LEGACY_PAP := true
 
 # Fm
-#QCOM_FM_ENABLED := true
+QCOM_FM_ENABLED := true
+AUDIO_FEATURE_ENABLED_FM := true
 
 # Wlan
 BOARD_HAS_QCOM_WLAN              := true
@@ -169,13 +167,18 @@ BOARD_SEPOLICY_DIRS += \
     device/sony/nicki/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+       device.te \
        file_contexts \
+       property.te \
+       property_contexts \
+       healthd.te \
+       init_shell.te \
        vold.te \
-       netmgrd.te \
        thermal-engine.te \
        rmt_storage.te \
        mpdecision.te \
        mm-qcamerad.te \
        location.te \
        sdcardd.te \
-       system_app.te
+       system_app.te \
+       system_server.te
