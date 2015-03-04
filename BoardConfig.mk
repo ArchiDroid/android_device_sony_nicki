@@ -176,8 +176,9 @@ BOARD_SEPOLICY_UNION += \
        vold.te \
        thermal-engine.te \
        rmt_storage.te \
-       mpdecision.te \
+       mediaserver.te \
        mm-qcamerad.te \
+       mpdecision.te \
        location.te \
        sdcardd.te \
        system_app.te \
