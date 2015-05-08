@@ -123,8 +123,6 @@ TARGET_LIBINIT_DEFINES_FILE := device/sony/nicki/init/init_nicki.c
 
 TARGET_USES_LOGD := false
 
-BOARD_USES_LEGACY_MMAP := true
-
 BOARD_HARDWARE_CLASS := device/sony/nicki/cmhw/
 
 # Sepolicy
@@ -146,7 +144,6 @@ BOARD_SEPOLICY_UNION += \
        mm-qcamerad.te \
        mpdecision.te \
        location.te \
-       rmt_storage.te \
        sdcardd.te \
        system_app.te \
        system_server.te \
