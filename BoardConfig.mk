@@ -15,6 +15,13 @@
 # inherit from msm8960-common
 include device/sony/msm8960-common/BoardConfigCommon.mk
 
+# Enable dex-preoptimization to speed up first boot sequence
+ifeq ($(HOST_OS),linux)
+  ifeq ($(WITH_DEXPREOPT),)
+    WITH_DEXPREOPT := true
+  endif
+endif
+
 USE_CAMERA_STUB := false
 
 TARGET_SPECIFIC_HEADER_PATH += device/sony/nicki/include
